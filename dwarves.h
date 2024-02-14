@@ -426,8 +426,8 @@ int lang__str2int(const char *lang);
  * @id: uint32_t tag id
  */
 #define cu__for_each_constant(cu, id, pos)		\
-	for (id = 0; id < cu->tags_table.nr_entries; ++id) \
-		if (!(pos = cu->tags_table.entries[id]) || \
+	for (id = 0; id < cu->tables->tags.nr_entries; ++id) \
+		if (!(pos = cu->tables->tags.entries[id]) || \
 		    !tag__is_constant(pos))		\
 			continue;			\
 		else
