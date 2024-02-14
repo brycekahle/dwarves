@@ -780,7 +780,7 @@ static struct constant *constant__new(Dwarf_Die *die, struct cu *cu, struct conf
 	struct constant *constant = tag__alloc(cu, sizeof(*constant));
 
 	if (constant != NULL) {
-		tag__init(&constant->tag, cu, die);
+		tag__init(&constant->tag, cu, die, conf);
 		constant->name = attr_string(die, DW_AT_name, conf);
 		constant->value = attr_numeric(die, DW_AT_const_value);
 	}
@@ -2208,8 +2208,7 @@ static struct tag *__die__process_tag(Dwarf_Die *die, struct cu *cu,
 	case DW_TAG_atomic_type:
 		tag = die__create_new_tag(die, cu, conf);	break;
 	case DW_TAG_unspecified_type:
-		cu->unspecified_type.tag =
-			tag = die__create_new_tag(die, cu, conf); break;
+		tag = die__create_new_tag(die, cu, conf);	break;
 	case DW_TAG_pointer_type:
 		tag = die__create_new_pointer_tag(die, cu, conf);	break;
 	case DW_TAG_ptr_to_member_type:
